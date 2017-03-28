@@ -15,15 +15,7 @@ void write(option *cfg) {
                 printf("\n");
 
         }
-}
-
-int  mymemcpy(option *cfg, char** tmp) {
-	int w=cfg->width;
-	int h=cfg->height;
-	for(int i=1;i<=cfg->height;i++) 
-		for(int j=1;j<=cfg->width;i++)
-			cfg->grid[i][j]=tmp[i][j];
-	return 0;
+	printf("\n\n");
 }
 
 int main(int argc, char**argv){
@@ -44,8 +36,6 @@ int main(int argc, char**argv){
 	}
 	fill(&cfg);
 	write(&cfg);
-	
-	mymemcpy(&cfg,generate(&cfg));
-
-        write(&cfg);
+	generate(&cfg);
+	write(&cfg);	
 }

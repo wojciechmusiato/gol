@@ -22,7 +22,7 @@
 		}
 		return 0;
 	}
-	char** generate(option *cfg) {
+	int  generate(option *cfg) {
 		
 		int height = cfg->height;
 		int width= cfg->width;	
@@ -31,9 +31,10 @@
 			tmp[i] = malloc((width+2)*sizeof(tmp[i]));
 		
 		int i,j;
-		int s=0;
-		for(i=1;i<=10;i++) {
-			for(j=1;j<=10;j++) {
+		int s;
+		for(i=1;i<=height;i++) {
+			for(j=1;j<=width;j++) {
+				s=0;
 				if (GET(i-1,j-1)=='+')
 					s++;			
 				if (GET(i-1,j)=='+')
@@ -62,7 +63,10 @@
 					tmp[i][j]='+';
 				else 
 					tmp[i][j]='-';		
-			}
-		return tmp;
+			}	
+		for(i=1;i<=height;i++) 				// memcpy
+			for(j=1;j<=width;j++)
+				cfg->grid[i][j]=tmp[i][j];
+		return 0;
 		}
 	}
