@@ -6,10 +6,10 @@
 #include <string.h>
 
 
-void write(option *cfg) {
-        int j,i;
-        for(int i = 1;i<=cfg->width;i++){
-                for( j = 0 ; j<=cfg->height;j++)
+void write(option *cfg, int k) {
+        int j,i;					// k to paramter , jesli = 1 to wypisuje z powloka, jesli 0 to bez
+        for(int i = 1-k;i<=cfg->width+k;i++){
+                for( j = 1-k ; j<=cfg->height+k;j++)
                         printf("%c ",cfg->grid[i][j]);
 
                 printf("\n");
@@ -35,7 +35,7 @@ int main(int argc, char**argv){
 		return EXIT_FAILURE;
 	}
 	fill(&cfg);
-	write(&cfg);
+	write(&cfg,1);
 	generate(&cfg);
-	write(&cfg);	
+	
 }

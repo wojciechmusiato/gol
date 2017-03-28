@@ -23,15 +23,13 @@
 		return 0;
 	}
 	int  generate(option *cfg) {
-		
+		int i,j,s;
 		int height = cfg->height;
 		int width= cfg->width;	
-		char **tmp = malloc((height+2)*sizeof(tmp));
-		for(int i = 0 ; i <= width+1 ; i++)  			  
-			tmp[i] = malloc((width+2)*sizeof(tmp[i]));
+		char **tmp = malloc((height)*sizeof(tmp));
+		for(i = 0 ; i <= height-1 ; i++)  			  
+			tmp[i] = malloc((width)*sizeof(tmp[i]));
 		
-		int i,j;
-		int s;
 		for(i=1;i<=height;i++) {
 			for(j=1;j<=width;j++) {
 				s=0;
@@ -43,9 +41,6 @@
 					s++;
 							
 				if (GET(i,j-1)=='+')
-					s++;			
-			
-				if (GET(i,j)=='+')
 					s++;			
 
 				if (GET(i,j+1)=='+')
@@ -60,13 +55,16 @@
 				if (GET(i+1,j+1)=='+')
 					s++;	
 				if (s>=2)
-					tmp[i][j]='+';
+					tmp[i-1][j-1]='+';
 				else 
-					tmp[i][j]='-';		
+					tmp[i-1][j-1]='-';		
 			}	
-		for(i=1;i<=height;i++) 				// memcpy
+		for(i=1;i<=height;i++) 	{			// memcpy
 			for(j=1;j<=width;j++)
-				cfg->grid[i][j]=tmp[i][j];
+				printf("%c ",tmp[i-1][j-1]);
+			printf("\n");
+		}
+			//	cfg->grid[i][j]=tmp[i-1][j-1];
 		return 0;
 		}
 	}
