@@ -37,5 +37,7 @@ int main(int argc, char**argv){
 	fill(&cfg);
 	write(&cfg,1);
 	generate(&cfg);
+	fill(&cfg);
+	write(&cfg,1);
 		
 }
