@@ -8,8 +8,8 @@
 
 void write(option *cfg, int k) {
         int j,i;					// k to paramter , jesli = 1 to wypisuje z powloka, jesli 0 to bez
-        for(int i = 1-k;i<=cfg->width+k;i++){
-                for( j = 1-k ; j<=cfg->height+k;j++)
+        for(int i = 1-k;i<=cfg->height+k;i++){
+                for( j = 1-k ; j<=cfg->width+k;j++)
                         printf("%c ",cfg->grid[i][j]);
 
                 printf("\n");
@@ -37,5 +37,5 @@ int main(int argc, char**argv){
 	fill(&cfg);
 	write(&cfg,1);
 	generate(&cfg);
-	
+		
 }

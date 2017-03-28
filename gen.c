@@ -26,9 +26,10 @@
 		int i,j,s;
 		int height = cfg->height;
 		int width= cfg->width;	
+		printf("%d to wysokosc\n",width);
 		char **tmp = malloc((height)*sizeof(tmp));
-		for(i = 0 ; i <= height-1 ; i++)  			  
-			tmp[i] = malloc((width)*sizeof(tmp[i]));
+		for(i = 0 ; i < height ; i++)  			  
+			tmp[i] = malloc((width)*sizeof(char));
 			
 		for(i=1;i<=height;i++) {
 			for(j=1;j<=width;j++) {
@@ -54,10 +55,16 @@
 				
 				if (GET(i+1,j+1)=='+')
 					s++;	
-				if (s>2)
+			
+
+				if ((s==2 || s==3)&&GET(i,j)=='+')
 					tmp[i-1][j-1]='+';
-				else 
-					tmp[i-1][j-1]='-';
+				else if(s==3 && GET(i,j)=='-'){
+					tmp[i-1][j-1]='+';		
+               			}
+				else{
+                   			 tmp[i-1][j-1]='-';
+               			}		
 			}	
 		for(i=1;i<=height;i++) 	{			// memcpy
 			for(j=1;j<=width;j++)
