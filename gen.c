@@ -54,10 +54,13 @@
 				
 				if (GET(i+1,j+1)=='+')
 					s++;	
-				if (s>=2)
-					tmp[i-1][j-1]='+';
-				else 
-					tmp[i-1][j-1]='-';		
+				if ((s==2 || s==3)&&GET(i,j)=='+')
+					tmp[i][j]='+';
+				else if(s==3 && GET(i,j)=='-'){
+					tmp[i][j]='+';		
+                }else{
+                    tmp[i][j]='-';
+                }		
 			}	
 		for(i=1;i<=height;i++) 	{			// memcpy
 			for(j=1;j<=width;j++)
