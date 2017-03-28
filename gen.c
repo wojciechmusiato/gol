@@ -22,7 +22,7 @@
 		}
 		return 0;
 	}
-	char **generate(option *cfg) {
+	char** generate(option *cfg) {
 		
 		int height = cfg->height;
 		int width= cfg->width;	

@@ -4,6 +4,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+
+void write(option *cfg) {
+        int j,i;
+        for(int i = 1;i<=cfg->width;i++){
+                for( j = 0 ; j<=cfg->height;j++)
+                        printf("%c ",cfg->grid[i][j]);
+
+                printf("\n");
+
+        }
+}
+
+int  mymemcpy(option *cfg, char** tmp) {
+	int w=cfg->width;
+	int h=cfg->height;
+	for(int i=1;i<=cfg->height;i++) 
+		for(int j=1;j<=cfg->width;i++)
+			cfg->grid[i][j]=tmp[i][j];
+	return 0;
+}
+
 int main(int argc, char**argv){
 	FILE* config = fopen("config.cfg","r");
 	FILE* grid = fopen("gen.cfg","r");
@@ -21,28 +43,9 @@ int main(int argc, char**argv){
 		return EXIT_FAILURE;
 	}
 	fill(&cfg);
-	int j;
-	for(int i = 0;i<=cfg.width+1;i++){
-		for( j = 0 ; j<=cfg.height+1;j++)
-			printf("%c ",cfg.grid[i][j]);
-		
-		printf("\n");
+	write(&cfg);
+	
+	mymemcpy(&cfg,generate(&cfg));
 
-	}
-    int i;
-printf("%d to wysokosc, %d to szerokosc, %d to j",cfg.height,cfg.width,j);
-
-    if(cfg.print=0){
-        for(i=1;i<=cfg.numberofgen;i++){
-            memcpy(cfg.grid,generate(&cfg),(width+2)*(height+2)*sizeof(char));
-            makeimage(&cfg ,i, cfg.grid);
-        }
-    }else{
-        for(i=1;i<=cfg.numberofgen;i++){
-            memcpy(cfg.grid,generate(&cfg),(width+2)*(height+2)*sizeof(char));
-            if(cfg.print==i)
-                makeimage(&cfg ,i, cfg.grid);
-    }
+        write(&cfg);
 }
-
-
