@@ -4,7 +4,7 @@
 	int fill (option *cfg) {
 		int h=cfg->height;
 		int w=cfg->width;		///	grid[y][x]
-		cfg->grid[0][0]=cfg->grid[1][h-1];
+		cfg->grid[0][0]=cfg->grid[1][h];
 		cfg->grid[0][w+1]=cfg->grid[h][w];
 		cfg->grid[h+1][0]=cfg->grid[1][1];
 		cfg->grid[h+1][w+1]=cfg->grid[1][w];
@@ -15,6 +15,6 @@
 		}
 		for(int i=1;i<=h;i++) {
 			cfg->grid[i][0]=cfg->grid[i][w];
-			cfg->grid[i][w]=cfg->grid[i][1];
+			cfg->grid[i][w+1]=cfg->grid[i][1];
 		}
 	}
