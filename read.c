@@ -22,8 +22,8 @@ int read_grid(FILE* grid, option *cfg){
 	cfg->grid = malloc((height+2)*sizeof(cfg->grid));  //+2 bo jeszcze powloka
 	for(i = 0 ; i < width+2 ; i++)  			   //+2 bo jeszcze powłoka
 		cfg->grid[i] = malloc((width+2)*sizeof(cfg->grid[i]));
-	i=1;
-	j=1;
+	i=1;		// 	oś	y
+	j=1;		//	oś	x	
 	while((c = fgetc(grid))!=EOF){
 		if(c=='-'){
 			cfg->grid[i][j] = '-';
