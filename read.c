@@ -19,11 +19,11 @@ int read_grid(FILE* grid, option *cfg){
 	cfg->width = width;
 	cfg->height = height;
 	rewind(grid);
-	cfg->grid = malloc(height*sizeof(cfg->grid));
-	for(i = 0 ; i < width ; i++)
-		cfg->grid[i] = malloc(width*sizeof(cfg->grid[i]));
-	i=0;
-	j=0;
+	cfg->grid = malloc((height+2)*sizeof(cfg->grid));  //+2 bo jeszcze powloka
+	for(i = 0 ; i < width+2 ; i++)  			   //+2 bo jeszcze powłoka
+		cfg->grid[i] = malloc((width+2)*sizeof(cfg->grid[i]));
+	i=1;
+	j=1;
 	while((c = fgetc(grid))!=EOF){
 		if(c=='-'){
 			cfg->grid[i][j] = '-';
@@ -33,7 +33,7 @@ int read_grid(FILE* grid, option *cfg){
 			j++;
 		}else if(c=='\n'){
 			i++;
-			j=0;
+			j=1;;
 		}
 	}		
 	return 0;

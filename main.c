@@ -1,7 +1,7 @@
 #include "read.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "gen.h"
 
 int main(int argc, char**argv){
 	FILE* config = fopen("config.cfg","r");
@@ -19,10 +19,14 @@ int main(int argc, char**argv){
 		fprintf(stderr,"error, unable to read information from grid.cfg");
 		return EXIT_FAILURE;
 	}
-	for(int i = 0;i<10;i++){
-		for(int j = 0 ; j<10 ;j++)
-			printf("%c",cfg.grid[i][j]);
+	fill(&cfg);
+	int j;
+	for(int i = 0;i<=cfg.width+1;i++){
+		for( j = 0 ; j<=cfg.height+1;j++)
+			printf("%c ",cfg.grid[i][j]);
 		
 		printf("\n");
+
 	}
+printf("%d to wysokosc, %d to szerokosc, %d to j",cfg.height,cfg.width,j);
 }
