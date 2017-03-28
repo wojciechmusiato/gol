@@ -1,8 +1,9 @@
 #include "read.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include "gen.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 int main(int argc, char**argv){
 	FILE* config = fopen("config.cfg","r");
 	FILE* grid = fopen("gen.cfg","r");
@@ -28,5 +29,20 @@ int main(int argc, char**argv){
 		printf("\n");
 
 	}
+    int i;
 printf("%d to wysokosc, %d to szerokosc, %d to j",cfg.height,cfg.width,j);
+
+    if(cfg.print=0){
+        for(i=1;i<=cfg.numberofgen;i++){
+            memcpy(cfg.grid,generate(&cfg),(width+2)*(height+2)*sizeof(char));
+            makeimage(&cfg ,i, cfg.grid);
+        }
+    }else{
+        for(i=1;i<=cfg.numberofgen;i++){
+            memcpy(cfg.grid,generate(&cfg),(width+2)*(height+2)*sizeof(char));
+            if(cfg.print==i)
+                makeimage(&cfg ,i, cfg.grid);
+    }
 }
+
+
