@@ -11,7 +11,7 @@ void encodeOneStep(const char* filename, const unsigned char* image, unsigned wi
   if(error) printf("error %u: %s\n", error, lodepng_error_text(error));
 }
 
-int generate(option *cfg){
+int makeimage(option *cfg,int nrgen, char **grid){
 	unsigned width = cfg->width*5, height = cfg->height*5;
 	unsigned char* image = malloc(width * height * 4);
 	unsigned x, y;
@@ -26,7 +26,7 @@ int generate(option *cfg){
 		}
 	for(i=0;i<cfg->height;i++){
 		for(j=0;i<cfg->width;j++){
-			if(cfg>grid[i][j]=='+'){
+			if(grid[i+1][j+1]=='+'){
 				for(int n=0;n<5;n++){
 					for(int m=0;m<5;m++){
 						image[4 * width * (i*5+n) + 4 * (j*5+m) + 0]  = 255;
