@@ -1,5 +1,6 @@
 #include "read.h"
 #include "gen.h"
+#include "imagen.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,9 +36,11 @@ int main(int argc, char**argv){
 		return EXIT_FAILURE;
 	}
 	fill(&cfg);
+	printf("ok");
 	write(&cfg,1);
-	generate(&cfg);
-	fill(&cfg);
-	write(&cfg,1);
+	printf("ok");
+	//generate(&cfg);
+	printf("ok");
+    makeimage(&cfg,1);
 		
 }
