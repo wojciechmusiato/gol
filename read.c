@@ -41,8 +41,8 @@ int read_grid(FILE* grid, option *cfg){
 int read_cfg(FILE* config, option *cfg){
 	int c;
 	int i;
-	int v[4];
-	for(i=0;i<4;i++){
+	int v[5];
+	for(i=0;i<5;i++){
 		while(isdigit(c=fgetc(config))==0&&c!=EOF)
 			;
 		fseek(config, -1, SEEK_CUR);

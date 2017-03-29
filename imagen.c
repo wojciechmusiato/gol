@@ -18,7 +18,7 @@ int makeimage(option *cfg,int nrgen){
 	unsigned char* image = malloc(width * height * 4);
 	unsigned x, y;
     char filename[10];
-    sprintf(filename, "result/image%d", nrgen);
+    sprintf(filename, "result/generation%d.png", nrgen);
 	int i,j;
 
 	for(y = 0 ; y < height ; y++ ) 
@@ -33,9 +33,9 @@ int makeimage(option *cfg,int nrgen){
 			if(cfg->grid[i+1][j+1]=='+'){
 				for(int n=0;n<k;n++){
 					for(int m=0;m<k;m++){
-						image[4 * width * (i*k+n) + 4 * (j*k+m) + 0]  = 0;
-						image[4 * width * (i*k+n) + 4 * (j*k+m) + 1]  = 25;
-						image[4 * width * (i*k+n) + 4 * (j*k+m) + 2]  = 125;
+						image[4 * width * (i*k+n) + 4 * (j*k+m) + 0]  = cfg->red;
+						image[4 * width * (i*k+n) + 4 * (j*k+m) + 1]  = cfg->green;
+						image[4 * width * (i*k+n) + 4 * (j*k+m) + 2]  = cfg->blue;
 						image[4 * width * (i*k+n) + 4 * (j*k+m) + 3]  = 255;
 					}
 				}

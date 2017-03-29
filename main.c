@@ -35,10 +35,19 @@ int main(int argc, char**argv){
 		fprintf(stderr,"error, unable to read information from grid.cfg");
 		return EXIT_FAILURE;
 	}
-	fill(&cfg);
-	write(&cfg,1);
-
-	generate(&cfg);
-    makeimage(&cfg,1);
-		
-}
+	int i;
+    if(cfg.print==0){
+        for(i=1;i<=cfg.numberofgen;i++){
+	        fill(&cfg);
+            generate(&cfg);
+            makeimage(&cfg,i);
+        }
+    }else if (cfg.print >0 && cfg.print <cfg.numberofgen){
+            fill(&cfg);
+            generate(&cfg);
+            makeimage(&cfg,cfg.print);
+    }else{
+            fprintf(stderr,"error, the number of generation you wanted to print is invalid: %d",cfg.print);
+    }
+    return EXIT_SUCCESS;
+}  
