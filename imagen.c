@@ -13,14 +13,14 @@ void encodeOneStep(const char* filename, const unsigned char* image, unsigned wi
 }
 
 int makeimage(option *cfg,int nrgen){
-	printf("ok");
-	unsigned width = cfg->width*5, height = cfg->height*5;
+    int k=10;
+	unsigned width = cfg->width*k, height = cfg->height*k;
 	unsigned char* image = malloc(width * height * 4);
 	unsigned x, y;
     char filename[10];
-    sprintf(filename, "image%d", nrgen);
+    sprintf(filename, "result/image%d", nrgen);
 	int i,j;
-	printf("ok");
+
 	for(y = 0 ; y < height ; y++ ) 
  		for(x = 0; x < width; x++) {
 			image[4 * width * y + 4 * x + 0] = 255;
@@ -28,22 +28,21 @@ int makeimage(option *cfg,int nrgen){
 			image[4 * width * y + 4 * x + 2] = 255;
 			image[4 * width * y + 4 * x + 3] = 255;
 		}
-	printf("ok");
 	for(i=0;i<cfg->height;i++){
-		for(j=0;i<cfg->width;j++){
+		for(j=0;j<cfg->width;j++){
 			if(cfg->grid[i+1][j+1]=='+'){
-				for(int n=0;n<5;n++){
-					for(int m=0;m<5;m++){
-						image[4 * width * (i*5+n) + 4 * (j*5+m) + 0]  = 255;
-						image[4 * width * (i*5+n) + 4 * (j*5+m) + 0]  = 25;
-						image[4 * width * (i*5+n) + 4 * (j*5+m) + 0]  = 125;
-						image[4 * width * (i*5+n) + 4 * (j*5+m) + 0]  = 255;
+				for(int n=0;n<k;n++){
+					for(int m=0;m<k;m++){
+						image[4 * width * (i*k+n) + 4 * (j*k+m) + 0]  = 0;
+						image[4 * width * (i*k+n) + 4 * (j*k+m) + 1]  = 25;
+						image[4 * width * (i*k+n) + 4 * (j*k+m) + 2]  = 125;
+						image[4 * width * (i*k+n) + 4 * (j*k+m) + 3]  = 255;
 					}
 				}
 			}
 		}
 	}
-
+	
   encodeOneStep(filename, image, width, height);
 
   free(image);

@@ -36,11 +36,9 @@ int main(int argc, char**argv){
 		return EXIT_FAILURE;
 	}
 	fill(&cfg);
-	printf("ok");
 	write(&cfg,1);
-	printf("ok");
-	//generate(&cfg);
-	printf("ok");
+
+	generate(&cfg);
     makeimage(&cfg,1);
 		
 }
