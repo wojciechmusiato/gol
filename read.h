@@ -6,7 +6,7 @@
 typedef struct {
 	int height;
 	int width;
-	char **grid;
+	char grid[200][200];
 	int numberofgen;
 	int print;
 	int red;

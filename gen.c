@@ -26,9 +26,7 @@
 		int i,j,s;
 		int height = cfg->height;
 		int width= cfg->width;	
-		char **tmp = malloc((height)*sizeof(tmp));
-		for(i = 0 ; i < width ; i++)  			  
-			tmp[i] = malloc((width)*sizeof(char));
+		char tmp[200][200];
 			
 		for(i=1;i<=height;i++) {
 			for(j=1;j<=width;j++) {
