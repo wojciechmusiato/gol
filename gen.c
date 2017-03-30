@@ -62,14 +62,13 @@
 				else{
                    			 tmp[i-1][j-1]='-';
                			}		
-
 			}
 		}
-		
 			
 		for(i=1;i<=height;i++)		// memcpy
 			for(j=1;j<=width;j++)
 				GET(i,j)=tmp[i-1][j-1];
+        return 0;
 		}
 
 	

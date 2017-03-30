@@ -35,7 +35,7 @@ int main(int argc, char**argv){
 		fprintf(stderr,"error, unable to read information from grid.cfg");
 		return EXIT_FAILURE;
 	}
-write(&cfg,0);
+    write(&cfg,0);
 	int i;
     makeimage(&cfg,0);
     if(cfg.print==0){

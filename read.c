@@ -16,17 +16,18 @@ int read_grid(FILE* grid, option *cfg){
 		if(((c=='-')||c=='+') && height == 1)
 			width++;
 	}
-   printf("k");
 	cfg->width = width;
 	cfg->height = height;
 	rewind(grid);
-	//cfg->grid = malloc((width+2)*sizeof(cfg->grid));  //+2 bo jeszcze powloka
 
-	//for(i = 0 ; i <= height+1 ; i++)  			  
-	//	cfg->grid[i] = malloc((height+2)*sizeof(cfg->grid[i]));
+    cfg->grid = malloc((height+2)*sizeof(char**));  //+2 bo jeszcze powloka
+
+	for(i = 0 ; i <= height+1 ; i++)  			  
+	    cfg->grid[i] = malloc((width+2)*sizeof(char*));
+
 	i=1;		// 	oś	y
 	j=1;		//	oś	x	
-   printf("k");
+
 	while((c = fgetc(grid))!=EOF){
 		if(c=='-'){
 			cfg->grid[i][j] = '-';
