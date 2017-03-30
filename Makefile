@@ -1,4 +1,4 @@
-Gameoflife: main.o read.o gen.o imagen.o lodepng.o
+Gameoflife.exe: main.o read.o gen.o imagen.o lodepng.o
 	    $(CC) -o Gameoflife read.o main.o gen.o imagen.o lodepng.o
 
 main.o: read.h gen.h imagen.h
@@ -19,7 +19,7 @@ lodepng.o: lodepng.h
 .PHONY: clean
 
 clean:
-	-rm *.o Gameoflife result/*
+	-rm *.o Gameoflife result/* *.gch
 
 test:
 	./Gameoflife
