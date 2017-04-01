@@ -41,6 +41,11 @@ int main(int argc, char**argv){
 		fprintf(stderr,"error, unable to read information from config.cfg");
 		return EXIT_FAILURE;
 	}
+    if(cfg.red<0||cfg.red>255||cfg.green<0||cfg.green>255||cfg.blue<0||cfg.blue>255){
+        cfg.red=0;
+        cfg.green=0;
+        cfg.blue=0;    
+    }
 	printf("\nPierwsza generacji, wczytana z pliku to:\n");
 	write(&cfg,0);
 	int i;
