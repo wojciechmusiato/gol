@@ -19,7 +19,7 @@ lodepng.o: lodepng.h
 .PHONY: clean
 
 clean:
-	-rm *.o Gameoflife result/* *.gch
+	-rm *.o -f Gameoflife result/* *.gch
 
 test:
 	./Gameoflife
