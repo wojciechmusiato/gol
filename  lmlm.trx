@@ -1,0 +1,99 @@
+
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\begin{document}
+
+\begin{Huge}
+\begin{center}
+Gra w życie - sprawozdanie
+\end{center}
+\end{Huge}
+\begin{center}
+{\Large Wojciech Musiatowicz i Michał Weiss}
+\end{center}
+
+\section{Wprowadzenie}
+\subsection*{Ogólne reguły gry}
+
+
+Gra toczy się na  planszy podzielonej na kwadratowe komórki. Każda komórka ma
+ośmiu „sąsiadów” czyli komórki przylegające do niej bokami i rogami. Każda komórka może
+znajdować się w jednym z dwóch stanów: może być albo „żywa” (włączona), albo „martwa”
+(wyłączona). Stany komórek zmieniają się w pewnych jednostkach czasu. Stan wszystkich komórek
+w pewnej jednostce czasu jest używany do obliczenia stanu wszystkich komórek w następnej
+jednostce. Po obliczeniu wszystkie komórki zmieniają swój stan dokładnie w tym samym
+momencie. Stan komórki zależy tylko od liczby jej żywych sąsiadów.
+
+Martwa komórka, która ma dokładnie 3 żywych sąsiadów, staje się żywa w następnej jednostce
+czasu (rodzi się)
+
+Żywa komórka z 2 albo 3 żywymi sąsiadami pozostaje nadal żywa; przy innej liczbie sąsiadów
+umiera (z „samotności” albo „zatłoczenia”).
+\subsection*{Reguły działania planszy}
+\section{Struktura programu}
+\subsection*{Funkcjonalność}
+
+Program został napisany w języku C. Symuluje grę w życie Johna Connowaya.  Został przewidziany do używania w systemach Windows i Unix. Może być obsługiwany zarówno z linii komend, jak i graficznego interfejsu użytkownika.
+
+Program w zależności od podanego układu komórek i wielkości planszy generuje pliki png zawierające konkretną generację lub podaną liczbę pierwszych generacji. Na utworzonych obrazkach biały kolor reprezentuje martwe komórki, natomiast kolor żywych komórek może ustalić użytkownik.
+\subsection*{Działanie programu}
+Program pobiera parametry z pliku do odpowiednich struktur. Następnie z kolejnego pliku czytana jest zerowa generacja. Na jej podstawie moduł symulujący tworzy kolejne generacje. W
+zależności od konfiguracji, przekazywana jest informacja do modułu, który stworzy i zapisze plik
+png.
+\subsection*{Pliki, ich funkcjonalność oraz struktura}
+\subsubsection*{*.cfg}
+Plik konfiguracyjny, który można modyfikować.Nazwę pliku, z którego ładowana będzie pierwsza plansza można opcjonalnie podać jako argument linii wiersza poleceń. Domyślna nazwa pliku to "gen.cfg".
+Plik zawiera układ komórek, na podstawie której symulowane są kolejne generacje. Komórki reprezentuje macierz znaków plus i minus, gdzie "-" uchodzi za martwą komórkę, a "+" żywą.
+\subsubsection*{config.cfg}
+Plik konfiguracyjny, który można modyfikować. Zawiera następujące opcje:\\
+\emph{numberofgen }- liczba generacji, które chcemy symulować;\\
+\emph{print} - numer generacji, którego graficzną reprezentację chcemy zobaczyć. Dla wartości "0" wszystkie generacje są eksportowane do plików png;\\
+\emph{red,green,blue} - przyjmują wartości  od 0 do 255, które ustawiają kolor żywych komórek na obrazkach.
+\subsubsection*{main.c}
+Główny moduł sterujący. 
+\subsubsection*{read.h}
+Plik nagłówkowy zawierający strukturę:\\
+typedef struct \{\par
+int height; // wysokość planszy\par
+	int width; // szerokość planszy\par
+	char **grid; // macierz przechowująca żywe i martwe komórki\par
+	int numberofgen;\par
+	int print;\par
+	int red;\par
+	int green;\par
+	int blue;\\
+\}option;\\
+oraz prototypy funkcji \\
+int read\_cfg(FILE* config, option *cfg);\\
+int read\_grid(FILE* grid, option *cfg);\\
+\subsubsection*{read.c}
+Moduł odpowiedzialny za czytanie informacji z plików config.cfg i gen.cfg.
+\subsubsection*{gen.h}
+Plik nagłówkowy do modułu symulującego kolejne generacje.
+\subsubsection*{gen.c}
+Moduł symulujący generacje. Zawiera funkcje:\\
+\emph{int fill (option *cfg) }- odpowiedzialna za poprawne ustawienie komórek na krawędziach planszy, by funkcja generate() mogła sprawdzić ich sąsiedztwo. Funkcja wypełnia zewnętrzną powłokę macierzy hxw, rozszerzając ją tym samym do macierzy (h+2)x(w+2). Dodatkowe pola planszy gry symbolizują sąsiadów pól znajdujących się na krawędziach zasadniczej planszy (rozmiaru nxn). Pola z górnej krawędzi sąsiadują z polami z dolnej krawędzi (i odwrotnie).Natomiast lewa krawędź sąsiaduje z prawą. Narożniki rozszerzonej macierzy również reprezentują sąsiadów pól na rogach planszy właściwej. 
+Pole[0][0] symbolizuję pole [h][1]
+Pole[0][w+1] symbolizuje pole[h][w]
+Pole[h+1][0] symbolizuje pole [1][1]
+Pole[h+1][w+1] symbolizuje pole [1][w]
+ \\
+\emph{int  generate(option *cfg)} - odpowiedzialna za sprawdzenie sąsiedztwa każdej komórki i zapisanie tablicy dwuwymiarowej temp[][]. Następnie dane z tablicy nadpisywane są do grid[][].
+\subsubsection*{imagen.h}
+Plik nagłówkowy do modułu programującego obrazki.
+\subsubsection*{imagen.c}
+Moduł programujący obrazki png. Zawiera funkcje:\\
+int makeimage(option *cfg,int nrgen) - gotowa tablica jest wykorzystana do stworzenia obrazku. Przekazuje do modułu lodepng.c informacje dotyczące obrazka wraz z kolorami oraz jego nazwę.
+\subsubsection*{lodepng.h oraz lodepng.c}
+Moduł generujący obrazki png. Jest to zewnętrzna biblioteka udostępniona do dowolnego użytku na stronie\emph{ http://lodev.org/lodepng/}
+\subsubsection*{Makefile}
+Plik kompilujący program.
+\subsubsection*{clean.sh, install.sh}
+Skrypty umożliwiające korzystanie z programu bez linii komend w środowiskach typu Unix. Clean.sh usuwa zawartośc folderu result, a install.sh kompiluje pliki.
+\subsubsection*{clean.bat, install.bat}
+Pliki wsadowe umożliwiające korzystanie z programu bez linii komend w systemie operacyjnym Windows.
+\pagenumbering{gobble}
+
+  
+\end{document}
