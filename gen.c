@@ -6,7 +6,7 @@
 
 	int fill (option *cfg) {
 		int h=cfg->height;
-		int w=cfg->width;		///	grid[y][x]
+		int w=cfg->width;		/// OSIE	grid[y][x]
 		cfg->grid[0][0]=cfg->grid[h][1];
 		cfg->grid[0][w+1]=cfg->grid[h][w];
 		cfg->grid[h+1][0]=cfg->grid[1][1];
@@ -26,7 +26,7 @@
 		int i,j,s;
 		int height = cfg->height;
 		int width= cfg->width;	
-		char tmp[200][200];
+		char tmp[height][width];
 			
 		for(i=1;i<=height;i++) {
 			for(j=1;j<=width;j++) {

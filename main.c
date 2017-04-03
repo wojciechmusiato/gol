@@ -20,23 +20,32 @@ void write(option *cfg, int k) {
 }
 
 int main(int argc, char**argv){
+	option cfg;
 	FILE* config = fopen("config.cfg","r");
-	FILE* grid = argc==1 ? fopen("gen.cfg","r") : fopen(argv[1],"r");
+	if ((argc==1)||(strcmp(argv[1], "-rand") !=0)) {
+		FILE* grid = argc==1 ? fopen("gen.cfg","r") : fopen(argv[1],"r");
+		if(grid ==NULL) {
+			fprintf(stderr,"error, unable to read %s \n",argc==1 ? "gen.cfg" : argv[1]);
+			return EXIT_FAILURE;
+		}
+		if(read_grid(grid, &cfg) == 1){
+			fprintf(stderr,"error, unable to read %s \n",argc==1 ? "gen.cfg" : argv[1]);
+			return EXIT_FAILURE;
+		}	
+	}
+	else {
+		if(argc != 4) {
+			fprintf(stderr,"error, incorrect arguments");
+			return EXIT_FAILURE;
+		}
+		rand_grid(&cfg,atoi(argv[2]),atoi(argv[3]));			
+	}
+
 	if(config == NULL){
 		fprintf(stderr, "error, unable to read : %s\n","config.cfg");
 		return EXIT_FAILURE;
 	}
-	if(grid ==NULL) {
-		fprintf(stderr,"error, unable to read %s \n",argc==1 ? "gen.cfg" : argv[1]);
-		return EXIT_FAILURE;
-	}
-
-	option cfg;
-
-	if(read_grid(grid, &cfg) == 1){
-		fprintf(stderr,"error, unable to read %s \n",argc==1 ? "gen.cfg" : argv[1]);
-		return EXIT_FAILURE;
-	}
+	
 	if(read_cfg(config, &cfg) == 1){
 		fprintf(stderr,"error, unable to read information from config.cfg \n");
 		return EXIT_FAILURE;

@@ -1,5 +1,6 @@
 #include "read.h"
 
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -15,7 +16,7 @@ int read_grid(FILE* grid, option *cfg){
 			height++;
 		if(((c=='-')||c=='+') && height == 1)
 			width++;
-        if(c!='-'&&c!=' '&&c!='+'&&c!='\n') return 1;
+	        if((c!='-')&&(c!=' ')&&(c!='+')&&(c!='\n')) return 1;
 	}
     if(width==0||height==0) return 1;
 	cfg->width = width;
@@ -43,7 +44,7 @@ int read_grid(FILE* grid, option *cfg){
 		}
 	}		
 	return 0;
-}
+	}
 int read_cfg(FILE* config, option *cfg){
 	int c;
 	int i;
@@ -60,5 +61,20 @@ int read_cfg(FILE* config, option *cfg){
 	cfg->red=v[2];
 	cfg->green=v[3];
 	cfg->blue=v[4];
+	return 0;
+}
+int rand_grid(option *cfg, int h, int w) {
+	int i,j,tmp;	
+	srand(time(0));
+	cfg->height=h;
+	cfg->width=w;
+	cfg->grid = malloc((h+2)*sizeof(char**));  //+2 bo jeszcze powloka
+	for(i = 0 ; i <= h+1 ; i++)  			  
+	    	cfg->grid[i] = malloc((w+2)*sizeof(char*));
+	for(i=1;i<=h;i++) {
+		for(j=1;j<=w;j++) {	
+		cfg->grid[i][j]= ((rand()%2) == 0) ? '+' : '-';
+		}
+	}
 	return 0;
 }

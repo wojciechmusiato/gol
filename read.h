@@ -16,5 +16,5 @@ typedef struct {
 
 int read_cfg(FILE* config, option *cfg);
 int read_grid(FILE* grid, option *cfg);
-
+int rand_grid(option *cfg, int h, int w);
 #endif
