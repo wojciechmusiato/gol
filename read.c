@@ -15,7 +15,9 @@ int read_grid(FILE* grid, option *cfg){
 			height++;
 		if(((c=='-')||c=='+') && height == 1)
 			width++;
+        if(c!='-'&&c!=' '&&c!='+'&&c!='\n') return 1;
 	}
+    if(width==0||height==0) return 1;
 	cfg->width = width;
 	cfg->height = height;
 	rewind(grid);
@@ -51,7 +53,7 @@ int read_cfg(FILE* config, option *cfg){
 			;
 		fseek(config, -1, SEEK_CUR);
 		if (fscanf( config, "%d",  &v[i] ) !=1)
-			return -1;
+			return 1;
 	}
 	cfg->numberofgen=v[0];
 	cfg->print=v[1];

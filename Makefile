@@ -1,4 +1,4 @@
-Gameoflife.exe: main.o read.o gen.o imagen.o lodepng.o
+Gameoflife: main.o read.o gen.o imagen.o lodepng.o
 	    $(CC) -o Gameoflife read.o main.o gen.o imagen.o lodepng.o
 
 main.o: read.h gen.h imagen.h

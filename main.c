@@ -27,18 +27,18 @@ int main(int argc, char**argv){
 		return EXIT_FAILURE;
 	}
 	if(grid ==NULL) {
-		fprintf(stderr,"error, unable to read %s",argc==1 ? "gen.cfg" : argv[1]);
+		fprintf(stderr,"error, unable to read %s \n",argc==1 ? "gen.cfg" : argv[1]);
 		return EXIT_FAILURE;
 	}
 
 	option cfg;
 
 	if(read_grid(grid, &cfg) == 1){
-		fprintf(stderr,"error, unable to read %s",argc==1 ? "gen.cfg" : argv[1]);
+		fprintf(stderr,"error, unable to read %s \n",argc==1 ? "gen.cfg" : argv[1]);
 		return EXIT_FAILURE;
 	}
 	if(read_cfg(config, &cfg) == 1){
-		fprintf(stderr,"error, unable to read information from config.cfg");
+		fprintf(stderr,"error, unable to read information from config.cfg \n");
 		return EXIT_FAILURE;
 	}
     if(cfg.red<0||cfg.red>255||cfg.green<0||cfg.green>255||cfg.blue<0||cfg.blue>255){
@@ -46,7 +46,7 @@ int main(int argc, char**argv){
         cfg.green=0;
         cfg.blue=0;    
     }
-	printf("\nPierwsza generacji, wczytana z pliku to:\n");
+	printf("\nGeneration read from file:\n");
 	write(&cfg,0);
 	int i;
 	makeimage(&cfg,0);
@@ -63,6 +63,6 @@ int main(int argc, char**argv){
         }else{
         	fprintf(stderr,"error, the number of generation you wanted to print is invalid: %d",cfg.print);
     	}
-	printf("Wybrane, kolejne generacje zostaly pomyslnie zapisane w folderze \\result\n");	
+	printf("Your chosen generations have been successfully saved in folder \\result\n");	
         return EXIT_SUCCESS;
 }  
