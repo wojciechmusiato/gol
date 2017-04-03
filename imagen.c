@@ -13,7 +13,9 @@ void encodeOneStep(const char* filename, const unsigned char* image, unsigned wi
 }
 
 int makeimage(option *cfg,int nrgen){
-    int k=10;
+    int k= 10;
+    if((cfg->width>200 || cfg->height>200)&&cfg->width<800 || cfg->height<800){ k=5;}
+    else if(cfg->width>800 || cfg->height>800){ k=2;}
 	unsigned width = cfg->width*k, height = cfg->height*k;
 	unsigned char* image = malloc(width * height * 4);
 	unsigned x, y;
