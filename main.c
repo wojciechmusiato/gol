@@ -55,7 +55,10 @@ int main(int argc, char**argv){
         cfg.green=0;
         cfg.blue=0;    
     }
-	printf("\nGeneration read from file:\n");
+	if ((argc==1)||(strcmp(argv[1], "-rand") !=0)) 
+		printf("\nGeneration read from file:\n");
+	else 
+		printf("\nGeneration chosen randomly:\n");
 	write(&cfg,0);
 	int i;
 	makeimage(&cfg,0);
