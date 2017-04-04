@@ -23,3 +23,5 @@ clean:
 
 test:
 	./Gameoflife
+	./Gameoflife -help
+	./Gameoflife -rand 10 10

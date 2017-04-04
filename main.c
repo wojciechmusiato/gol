@@ -22,7 +22,28 @@ void write(option *cfg, int k) {
 int main(int argc, char**argv){
 	option cfg;
 	FILE* config = fopen("config.cfg","r");
-	if ((argc==1)||(strcmp(argv[1], "-rand") !=0)) {
+    if ((argc==2)&&(strcmp(argv[1], "-help") ==0)){
+        printf("Gra w zycie 1.0 \n\
+OPIS\n\
+Gra w zycie - jeden z pierwszych i najbardziej znanych przykladow automatu komorkowego, wymyślony w roku 1970 przez brytyjskiego matematyka Johna Conwaya. Gra toczy się na planszy podzielonej na kwadratowe komorki. Kazda komorka ma osmiu „sasiadow” czyli komórki przylegajace do niej bokami i rogami. Kazda komorka moze znajdowac sie w jednym z dwoch stanow: moze być albo „zywa” (wlaczona), albo „martwa” (wylączona). Stany komorek zmieniaja sie w pewnych jednostkach czasu. W kolejnych generacjach wszystkie komorki zmieniaja swoj stan dokladnie w tym samym momencie. Stan danej komorki zalezy od liczby jej zywych sąsiadow.\n\
+Martwa komorka, ktora ma dokladnie 3 żywych sąsiadow, staje się zywa w nastepnej jednostce czasu (rodzi sie)\n\
+Zywa komorka z 2 albo 3 zywymi sasiadami pozostaje nadal zywa; przy innej liczbie sasiadow umiera (z „samotnosci” albo „zatloczenia”).\n \n\
+KONFIGURACJA\n\
+W pliku config.cfg mozna konfigurowac nastepujace parametry:\n\
+numberofgen - liczba generacji, ktore chcemy symulowac;\n\
+print - numer generacji, ktorego graficzna reprezentacje chcemy zobaczyc. Dla wartosci ”0” wszystkie generacje są eksportowane do plikow png;\n\
+red,green,blue - przyjmuja wartosci od 0 do 255, ktore ustawiaja kolor zywych komorek na obrazkach.\n\
+Plik gen.cfg zawiera uklad komorek, na podstawie ktorej symulowane sa kolejne generacje. Komorki reprezentuje macierz znakow plus i minus, gdzie ”-” uchodzi za martwa komorkę, a ”+” zywa.\n\n\
+UZYCIE\n\
+./Gameoflife [-help] [-rand <width> <height>] [*.cfg]\n\n\
+Po wywolaniu w folderze ./result pojawia sie wybrane symulowane generacje\n\n\
+OPCJE\n\
+-help - pomoc\n\
+-rand <height> <width> - losowanie konfiguracji planszy o danej wysokosci i szerokosci\n\
+*.cfg - argument wskazujacy na plik zawierajacy plansze\n");
+return 0;
+                
+    }else if ((argc==1)||(strcmp(argv[1], "-rand") !=0)) {
 		FILE* grid = argc==1 ? fopen("gen.cfg","r") : fopen(argv[1],"r");
 		if(grid ==NULL) {
 			fprintf(stderr,"error, unable to read %s \n",argc==1 ? "gen.cfg" : argv[1]);
@@ -40,6 +61,7 @@ int main(int argc, char**argv){
 		}
 		rand_grid(&cfg,atoi(argv[2]),atoi(argv[3]));			
 	}
+   
 
 	if(config == NULL){
 		fprintf(stderr, "error, unable to read : %s\n","config.cfg");
