@@ -50,11 +50,11 @@ int main(int argc, char**argv){
 		fprintf(stderr,"error, unable to read information from config.cfg \n");
 		return EXIT_FAILURE;
 	}
-    if(cfg.red<0||cfg.red>255||cfg.green<0||cfg.green>255||cfg.blue<0||cfg.blue>255){
-        cfg.red=0;
-        cfg.green=0;
-        cfg.blue=0;    
-    }
+	if(cfg.red<0||cfg.red>255||cfg.green<0||cfg.green>255||cfg.blue<0||cfg.blue>255){
+        	cfg.red=0;
+       		cfg.green=0;
+    		cfg.blue=0;    
+	}
 	if ((argc==1)||(strcmp(argv[1], "-rand") !=0)) 
 		printf("\nGeneration read from file:\n");
 	else 
